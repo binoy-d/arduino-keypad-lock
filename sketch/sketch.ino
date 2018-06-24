@@ -13,6 +13,10 @@ char keys[ROWS][COLS] = {
 byte rowPins[ROWS] = {5,4,3,2};
 byte colPins[COLS] = {9,8,7,6};
 
+char correctPin[4] = {'1','2','3','4'};
+char enteredPin[4] = {'0','0','0','0'};
+int currentSpot = 0;
+
 Keypad keypad = Keypad(makeKeymap(keys),rowPins, colPins, ROWS, COLS);
 void setup() {
   // put your setup code here, to run once:
@@ -22,6 +26,11 @@ void setup() {
 void loop() {
   char key = keypad.getKey();
   if(key){
-    Serial.println(key);
+    enteredPin[currentSpot] = key;
+    currentSpot = currentSpot+1;
+    if(currentSpot == 4){
+      Serial.println(enteredPin);
+      currentSpot = 0;
+    }
   }
 }
