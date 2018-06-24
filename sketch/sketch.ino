@@ -30,7 +30,13 @@ void loop() {
     currentSpot = currentSpot+1;
     if(currentSpot == 4){
       Serial.println(enteredPin);
-      if(!strcmp(enteredPin, correctPin)){
+      bool yes = true;
+      for(int i = 0;i<4;i++){
+        if( strcmp(enteredPin[i], correctPin[i]) ){
+          yes = false;
+        }
+      }
+      if(yes){
         Serial.println("correct!");
       }else{
         Serial.println("wrong!");
