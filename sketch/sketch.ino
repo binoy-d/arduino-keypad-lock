@@ -1,4 +1,7 @@
 #include <Keypad.h>
+#include <Servo.h>
+
+Servo servo;
 
 const byte ROWS = 4;
 const byte COLS = 4;
@@ -19,11 +22,12 @@ int currentSpot = 0;
 
 Keypad keypad = Keypad(makeKeymap(keys),rowPins, colPins, ROWS, COLS);
 void setup() {
-  // put your setup code here, to run once:
+  servo.attach(10);
   Serial.begin(9600);
 }
 
 void loop() {
+  servo.write(0);
   char key = keypad.getKey();
   if(key){
     enteredPin[currentSpot] = key;
@@ -32,6 +36,8 @@ void loop() {
       Serial.println(enteredPin);
       if(strcmp(enteredPin,correctPin) == 0){
         Serial.println("correct!");
+        servo.write(180);
+        delay(10000);//wait 10 seconds
       }else{
         Serial.println("wrong!");
       }
