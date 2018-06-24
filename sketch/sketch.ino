@@ -30,6 +30,11 @@ void loop() {
     currentSpot = currentSpot+1;
     if(currentSpot == 4){
       Serial.println(enteredPin);
+      if(!strcmp(enteredPin, correctPin)){
+        Serial.println("correct!");
+      }else{
+        Serial.println("wrong!");
+      }
       currentSpot = 0;
     }
   }
